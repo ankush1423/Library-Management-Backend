@@ -1,0 +1,17 @@
+{
+  "name": "library-manage-mysql",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "node --watch --env-file=.env src/index.js"
+  },
+  "author": "Ankush Sirswal",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2",
+    "mysql2": "^3.12.0",
+    "sequelize": "^6.37.5"
+  }
+}

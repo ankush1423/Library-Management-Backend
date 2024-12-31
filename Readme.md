@@ -1,0 +1,1 @@
+# use and practice the technologies like mysql database , Node , Express , And sequelize
