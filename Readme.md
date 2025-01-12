@@ -1,1 +1,1 @@
-# use and practice the technologies like mysql database , Node , Express , And sequelize
+# use and practice the technologies like NoSql database , Node , Express , And MongoDB
