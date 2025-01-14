@@ -69,11 +69,10 @@ const bookSchema = new Schema(
   }
 );
 
-
 // Method to check if a book is available for borrowing
 bookSchema.methods.isAvailable = function () {
   return this.availableCopies > 0;
 };
 
 // Export the model
-module.exports = mongoose.model('Book', bookSchema);
+export const Book = mongoose.model('Book', bookSchema);
