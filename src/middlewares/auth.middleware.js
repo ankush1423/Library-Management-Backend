@@ -4,7 +4,7 @@ import {User} from '../models/index.js'
 
 export const verifyJWT = asyncHandler(async(req , res , next) => {
     try
-    {
+    {  
        const token = req.cookies?.accessToken ||  req.header("Authorization")?.replace("Bearer ","")
 
        if(!token)
@@ -12,7 +12,7 @@ export const verifyJWT = asyncHandler(async(req , res , next) => {
           throw new ApiError("Error while getting the Access Token")
        }
 
-       const decode =  jwt.decode(accessToken,process.env.ACCESS_TOKEN_SECRET)
+       const decode = await jwt.decode(token,process.env.ACCESS_TOKEN_SECRET)
 
        if(!decode)
        {

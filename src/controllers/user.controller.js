@@ -71,21 +71,21 @@ export const userLogin = asyncHandler(async(req,res) => {
         throw new ApiError("all feilds are mandatry")
      }
 
-     const user = await User.find({email : email}).select("-password -refreshToken")
+     const user = await User.findOne({email : email})
 
      if(!user)
      {
         throw new ApiError("user not found with this email")
      }
 
-     const isPasswordCorrect  = await user.comparePassword(password)
+     const isPasswordCorrect  = await user.isPasswordCorrect(password)
 
      if(!isPasswordCorrect)
      {
         throw new ApiError("please provide a valid password...")
      }
      
-     const {accessToken , refreshToken} = generateAccessAndRefresh(user._id)
+     const {accessToken , refreshToken} = await generateAccessAndRefresh(user._id)
      
      const loginuser = await User.findById(user._id).select("-password -refreshtoken")
 
@@ -93,7 +93,7 @@ export const userLogin = asyncHandler(async(req,res) => {
         httpOnly : true,
         secure : true
     }
-    
+
     return res
            .status(200)
            .cookie('accessToken',accessToken,options)
@@ -272,6 +272,7 @@ export const updateAccountDetails = asyncHandler(async(req , res) => {
 })
 
 export const updateProfilePicture = asyncHandler(async(req , res) => {
+
      const profilePath = req?.file.path
      if(!profilePath)
      {
@@ -285,7 +286,7 @@ export const updateProfilePicture = asyncHandler(async(req , res) => {
      }
 
      const updatedUser = await User.findByIdAndUpdate(
-         req?.user_id,
+         req?.user._id,
          {
             $set : {
                 profilePicture : profileRefrence?.url || ''
@@ -295,7 +296,7 @@ export const updateProfilePicture = asyncHandler(async(req , res) => {
             new : true
          }
      ).select("-password -refreshToken -borrowedBooks -role")
-
+    
      if(!updatedUser)
      {
         throw new ApiError("Error while updating the user")
