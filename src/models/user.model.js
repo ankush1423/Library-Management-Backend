@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken'
 
 const UserSchema = new mongoose.Schema(
    {
-     name: {
+     userName: {
        type: String,
        required: [true, 'Name is required'],
        trim: true,
@@ -59,6 +59,9 @@ const UserSchema = new mongoose.Schema(
      ],
      refreshToken : {
         type : String
+     },
+     profilePicture : {
+        type : String
      }
    },
    {
@@ -77,7 +80,7 @@ UserSchema.methods.comparePassword = async function (password){
    return isPaaswordCorrect
 }
 
-UserSchema.methods.generateAccessTolen = function (){
+UserSchema.methods.generateAccessToken = function (){
     return jwt.sign(
         {
            _id : this._id,
