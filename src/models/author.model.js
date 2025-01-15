@@ -60,7 +60,5 @@ const authorSchema = new Schema(
   }
 );
 
-
-
 // Export the model
 export const Author = mongoose.model('Author', authorSchema);

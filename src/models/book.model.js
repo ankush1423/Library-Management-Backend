@@ -10,9 +10,8 @@ const bookSchema = new Schema(
       minlength: [3, 'Title must be at least 3 characters'],
     },
     author: {
-      type: String,
-      required: [true, 'Author is required'],
-      trim: true,
+      type: mongoose.Schema.Types.ObjectId,
+      ref : 'Author'
     },
     genre: {
       type: String,
@@ -44,6 +43,7 @@ const bookSchema = new Schema(
     coverImage: {
       type: String,
       trim: true, // URL or Cloudinary link to cover image
+      required : true
     },
     totalCopies: {
       type: Number,

@@ -16,7 +16,16 @@ app.use(cookieParser())
 
 
 import userRoutes from './routes/user.route.js'
+import authorRoutes from './routes/author.route.js'
+import bookRoutes from './routes/book.route.js'
+import borrowerRoutes from './routes/borrower.route.js'
+import transactionRoutes from './routes/borrower.route.js'
 
 app.use('/api/v1/users',userRoutes)
+app.use('/api/v1/author',authorRoutes)
+app.use('/api/v1/books',bookRoutes)
+app.use('/api/v1/borroers',borrowerRoutes)
+app.use('/api/v1/transactions',transactionRoutes)
+
 
 export {app}
