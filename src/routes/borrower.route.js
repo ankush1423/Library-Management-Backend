@@ -11,6 +11,9 @@ import {
 
 const router = express.Router()
 
+router.use(verifyJWT)
+router.use(checkRole)
+
 router.route("/create-borrower").post(createBorrowwer)
 
 router.route("/:borrowerId").get(getBorrower)

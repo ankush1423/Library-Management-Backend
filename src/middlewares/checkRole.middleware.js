@@ -4,8 +4,8 @@ import {asyncHandler , ApiError , ApiResponse} from '../utils/index.js'
 export const checkRole = asyncHandler(async(req,res,next) => {
      try
      {
-        const user = await User.findOne({$and : [{_id : req?.user._id},{role : 'librarian'}]})
-        if(user)
+        const user = await User.findById(req?.user._id)
+        if(user?.role === 'librarian')
         {
             return next()
         }

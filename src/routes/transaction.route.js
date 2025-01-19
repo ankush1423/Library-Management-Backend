@@ -9,7 +9,8 @@ import {
 
 const router = express.Router()
 
-
+router.use(verifyJWT)
+router.use(checkRole)
 
 
 export default router;
